@@ -1,3 +1,5 @@
+//Link to the problem https://leetcode.com/problems/two-sum/
+
 /*Brute force approach*/
 
 class Solution {
