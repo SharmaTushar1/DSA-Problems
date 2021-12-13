@@ -1,5 +1,7 @@
 //link - https://leetcode.com/problems/number-of-good-pairs/
 
+//This is brute force approach and it can be optimized using hash map
+
 class Solution {
     public int numIdenticalPairs(int[] nums) {
         int count = 0;
