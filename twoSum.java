@@ -1,5 +1,7 @@
 //Link to the problem https://leetcode.com/problems/two-sum/
 
+//This is a nice question
+
 /*Brute force approach*/
 
 class Solution {
