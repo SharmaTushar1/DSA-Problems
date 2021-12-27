@@ -1,3 +1,4 @@
+[Discussion Post (created on 27/11/2021 at 15:3)](https://leetcode.com/problems/sqrtx/discuss/1650194/Easy-binary-search-solution-with-explanation.)  
 <h2>69. Sqrt(x)</h2><h3>Easy</h3><hr><div><p>Given a non-negative integer <code>x</code>,&nbsp;compute and return <em>the square root of</em> <code>x</code>.</p>
 
 <p>Since the return type&nbsp;is an integer, the decimal digits are <strong>truncated</strong>, and only <strong>the integer part</strong> of the result&nbsp;is returned.</p>
