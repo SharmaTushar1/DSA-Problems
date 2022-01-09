@@ -5,11 +5,11 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-    int setBits(int N) {
+    int setBits(int n) {
         int c = 0;
-        while (N!=0) {
-            if ((N&1) == 1) c++;
-            N>>=1;
+        while (n!=0) {
+            n = (n&(n-1));
+            c++;
         }
         return c;
     }
