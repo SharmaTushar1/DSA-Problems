@@ -1,23 +1,35 @@
 class Solution {
     public List<Integer> majorityElement(int[] arr) {
-        int majorityCheck = arr.length/3;
+        int element1 = -1;
+        int element2 = -1;
+        int count1 = 0;
+        int count2 = 0;
         int n = arr.length;
-        List<Integer> ls = new ArrayList<Integer>();
-        if (arr.length == 1) {ls.add(arr[0]); return ls;}
-        if (arr.length == 2) {
-            ls.add(arr[0]);
-            if (!ls.contains(arr[1])) ls.add(arr[1]);
-            return ls;}
-        for (int i = 0; i<n-1; i++) {
-            int count = 1;
-            for (int j = i+1; j<n; j++) {
-                if (arr[j] == arr[i]) count++;
-                
-            }if ((count >n/3) && (!ls.contains(arr[i]))) {
-                    ls.add(arr[i]);
-                }
+        for (int i = 0; i<n; i++) {
+            if (arr[i] == element1) count1++;
+            else if (arr[i] == element2) count2++;
+            else if (count1 ==0) {
+                element1 = arr[i];
+                count1++;
+            }
+            else if (count2 ==0) {
+                element2 = arr[i];
+                count2++;
+            }
+            else {
+                count1--;
+                count2--;
+            }
         }
-        Collections.sort(ls);
+        List<Integer> ls = new ArrayList<Integer>();
+        int c1 = 0;
+        int c2 = 0;
+        for (int i = 0; i<n; i++) {
+            if (arr[i]==element1) c1++;
+            else if (arr[i]==element2) c2++;
+        }
+        if (c1>n/3) ls.add(element1);
+        if (c2>n/3) ls.add(element2);
         return ls;
     }
 }
