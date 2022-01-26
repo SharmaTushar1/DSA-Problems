@@ -10,45 +10,50 @@
  * }
  */
 public class Solution {
+    
+    //optimized approach link to explanation - https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/49785/Java-solution-without-knowing-the-difference-in-len!/165648
+    
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         
-        // int len = length(headA);
+        if (headA == null || headB == null) return null;
         
-        ListNode tempB = headB;
+        ListNode a = headA;
+        ListNode b = headB;
         
-        ListNode tempA = headA;
-        
-        while (tempA!=null) {
-            tempB= headB;
+        while (a != b) {
             
-            while (tempB != null) {
-                
-                if (tempA==tempB) return tempA;
-                tempB = tempB.next;
-                
-            }
-            tempA = tempA.next;
+            a = a ==null?headB:a.next;
+            b = b==null?headA:b.next;
+            
         }
         
-        return null;
+        return a;
         
     }
     
-//     public int length(ListNode node) {
+    //Brute force approach
+//     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         
-//         count = 0;
-//         ListNode temp = node;
+//         // int len = length(headA);
         
-//         while (node!=null) {
-//             node = node.next;
-//             count++;
+//         ListNode tempB = headB;
+        
+//         ListNode tempA = headA;
+        
+//         while (tempA!=null) {
+//             tempB= headB;
+            
+//             while (tempB != null) {
+                
+//                 if (tempA==tempB) return tempA;
+//                 tempB = tempB.next;
+                
+//             }
+//             tempA = tempA.next;
 //         }
-//         node = temp;
         
-//         return count;
-        
+//         return null;
         
 //     }
-    
     
 }
