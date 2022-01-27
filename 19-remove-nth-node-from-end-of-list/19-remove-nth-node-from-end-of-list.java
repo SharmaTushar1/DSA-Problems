@@ -26,17 +26,17 @@ class Solution {
         
         ListNode prevNode = head;
         
-        ListNode nodeToDel = head;
+        // ListNode nodeToDel = head;
         
         for (int i = 1; i<=index-2; i++) {
             prevNode = prevNode.next;
         }
         
-        nodeToDel = prevNode.next;
+        // nodeToDel = prevNode.next;
         
         ListNode link = head;
         
-        link = nodeToDel.next;
+        link = prevNode.next.next;
         
         prevNode.next = link;
         return head;
