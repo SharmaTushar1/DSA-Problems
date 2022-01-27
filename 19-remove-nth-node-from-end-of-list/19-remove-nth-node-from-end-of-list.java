@@ -32,13 +32,7 @@ class Solution {
             prevNode = prevNode.next;
         }
         
-                System.out.println(index);
-        System.out.println(prevNode.val);
-        
-        // nodeToDel = head;/
-        
-        // for  (int i = 1; i<=index-1; i++) {
-            nodeToDel = prevNode.next;
+        nodeToDel = prevNode.next;
         
         ListNode link = head;
         
