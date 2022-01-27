@@ -37,15 +37,12 @@ class Solution {
         
         // nodeToDel = head;/
         
-        for  (int i = 1; i<=index-1; i++) {
-            nodeToDel = nodeToDel.next;
-        }
+        // for  (int i = 1; i<=index-1; i++) {
+            nodeToDel = prevNode.next;
         
         ListNode link = head;
         
-        for (int i =1; i<=index; i++) {
-            link = link.next;
-        }
+        link = nodeToDel.next;
         
         prevNode.next = link;
         return head;
