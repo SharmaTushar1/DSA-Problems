@@ -11,9 +11,13 @@
 class Solution {
     public ListNode partition(ListNode head, int x) {
        
-        ListNode dummy = new ListNode(0);
+        ListNode dummy1 = new ListNode(0);
         
-        ListNode tempDummy = dummy;
+        ListNode dummy2 = new ListNode(0);
+        
+        ListNode tempDummy = dummy1;
+        
+        ListNode tempDummy2 = dummy2;
         
         ListNode temp = head;
         
@@ -24,24 +28,18 @@ class Solution {
                 tempDummy.next = newNode;
                 tempDummy = tempDummy.next;
             }
-            
-            temp = temp.next;
-        }
-        
-        temp = head;
-        
-        while (temp!=null) {
-            
-            if (temp.val >= x) {
+            else {
                 ListNode newNode = new ListNode(temp.val);
-                tempDummy.next = newNode;
-                tempDummy = tempDummy.next;
+                tempDummy2.next = newNode;
+                tempDummy2 = tempDummy2.next;
             }
             
             temp = temp.next;
         }
         
-        return dummy.next;
+        tempDummy.next = dummy2.next;
+                
+        return dummy1.next;
          
     }
 }
