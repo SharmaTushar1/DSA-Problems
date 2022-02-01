@@ -8,37 +8,43 @@ class Solution {
         
         // 
         
-        List<Integer> list = new ArrayList();
+        // List<Integer> list = new ArrayList();
         
-        function(ans, list, nums);
+        function(ans, nums, 0);
         
         return ans;
         
         
     }
     
-    public void function(List<List<Integer>> ans, List<Integer> list, int[] nums) {
+    public void function(List<List<Integer>> ans, int[] arr, int start) {
         
-        if (list.size() == nums.length) {
-            ans.add(new ArrayList(list));
+        if (start == arr.length) {
+            List<Integer> list = new ArrayList();
+            for (int i =0; i<arr.length; i++) {
+                list.add(arr[i]);
+            }
+            
+            ans.add(list);
+            
+            
             return;
         }
         
-        for (int i = 0; i<nums.length; i++) {
+        for (int i = start; i<arr.length; i++) {
             
-            if (list.contains(nums[i])) continue;
-            list.add(nums[i]);
-            function(ans, list, nums);
-            list.remove(list.size() - 1);
+            swap(arr, start, i);
+            function(ans, arr, start+1);
+            swap(arr, start, i);
             
         }
         
     }
     
-//     public void swap(int[] arr, int a, int b) {
-//         int temp = arr[a];
-//         arr[a] = arr[b];
-//         arr[b] = temp;
-//     }
+    public void swap(int[] arr, int a, int b) {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
     
 }
