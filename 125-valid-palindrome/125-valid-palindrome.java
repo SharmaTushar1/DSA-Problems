@@ -12,7 +12,6 @@ class Solution {
                 else {
                     start++;
                     end--;
-                // }
             }
         }
         return true;
