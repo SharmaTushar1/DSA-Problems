@@ -18,17 +18,24 @@ class Solution {
         
         List<Integer> ls = new ArrayList<>();
         
-        function(root, ls);
+        TreeNode node = root;
+        
+        Stack<TreeNode> st = new Stack<>();
+        
+        while (true) {
+            if (node !=null) {
+                st.push(node);
+                node = node.left;
+            } else {
+                if (st.isEmpty()) break;
+                node = st.pop();
+                ls.add(node.val);
+                node = node.right;
+            }
+        }
         
         return ls;
         
-    }
-    
-    public void function(TreeNode root, List<Integer> ls) {
-        if (root == null) return;
-        function(root.left, ls);
-        ls.add(root.val);
-        function(root.right, ls);
     }
     
 }
