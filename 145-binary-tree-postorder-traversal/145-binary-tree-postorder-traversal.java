@@ -15,16 +15,24 @@
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
+        
         List<Integer> ls = new ArrayList<Integer>();
-        function(root, ls);
+        Stack<TreeNode> st1 = new Stack<>();
+        Stack<TreeNode> st2 = new Stack<>();
+        if (root == null) return ls;
+        
+        st1.push(root);
+        
+        while (!st1.isEmpty()) {
+            root = st1.pop();
+            st2.add(root);
+            if (root.left != null) st1.add(root.left);
+            if (root.right != null) st1.add(root.right);
+        }
+        
+        while (!st2.isEmpty()) ls.add(st2.pop().val);
+        
         return ls;
-    }
-    
-    public void function(TreeNode root, List<Integer> ls) {
-        if (root == null) return;
-        function(root.left, ls);
-        function(root.right, ls);
-        ls.add(root.val);
     }
     
 }
