@@ -15,33 +15,31 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        //first create queue to store the values of the nodes
-        Queue<TreeNode> queue = new LinkedList<>();
-        //create a new 2d list which'll return the answer
-        List<List<Integer>> wrapList = new LinkedList<>();
-        //check whether the tree is null or not
-        if (root == null) return wrapList;
-        //otherwise push the root to the queue
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            
-            int levelNum = queue.size();
-            //create another list to store the values of individual levels
-            List<Integer> subList = new LinkedList<>();
-            
-            //now we'll have a loop which'll iterate queuelist number of times to have all the conditions checked
-            for (int i = 0; i<levelNum; i++) {
-                if (queue.peek().left!=null) queue.offer(queue.peek().left);
-                if (queue.peek().right!=null) queue.offer(queue.peek().right);
-                subList.add(queue.poll().val);
-            }
-            
-            wrapList.add(subList);       
-            
-        }
-        return wrapList;
-    
         
+        List<List<Integer>> list = new ArrayList<>();
+        
+        if (root == null) return list;
+        
+        Queue<TreeNode> q = new LinkedList();
+        
+        q.offer(root);
+        
+        while (!q.isEmpty()) {
+            
+            int levelNum = q.size();
+            List<Integer> subList = new ArrayList();
+            
+            for (int i = 0; i<levelNum; i++) {
+                root = q.poll();
+                subList.add(root.val); 
+                if (root.left != null) q.offer(root.left);
+                if (root.right != null) q.offer(root.right);
+            }
+            list.add(subList);
+           
+        }
+        
+        return list;
         
     }
 }
