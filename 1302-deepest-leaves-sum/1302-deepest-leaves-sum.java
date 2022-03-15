@@ -16,20 +16,58 @@
 class Solution {
     public int deepestLeavesSum(TreeNode root) {
         
-         int res = 0, i;
-        LinkedList<TreeNode> q = new LinkedList<TreeNode>();
-        q.add(root);
+        if (root == null) return 0;
+        
+        Queue<TreeNode> q = new LinkedList();
+        
+        q.offer(root);
+        
+        int sum = 0;
+        
         while (!q.isEmpty()) {
-            for (i = q.size() - 1, res = 0; i >= 0; --i) {
-                TreeNode node = q.poll();
-                res += node.val;
-                if (node.right != null) q.add(node.right);
-                if (node.left  != null) q.add(node.left);
+            int qSize = q.size();
+            sum = 0;
+            for (int i = 0; i<qSize; i++) {
+                root = q.poll();
+                sum += root.val;
+                if (root.left!=null) q.offer(root.left);
+                if (root.right!=null) q.offer(root.right);
             }
         }
-        return res;
+        
+        return sum;
         
     }
     
+    public void maxDepth(TreeNode root, int[] maxDepth, int depth) {
+        
+        if (root == null) return;
+        
+        maxDepth(root.left, maxDepth, depth+1);
+        maxDepth(root.right, maxDepth, depth+1);
+        maxDepth[0] = Math.max(maxDepth[0], depth);
+        
+        
+        
+    }
+    
+    public void helper(TreeNode root, int counter, int maxDepth, int sum[]) {
+        if (root.left == null && root.right == null && counter == maxDepth) {
+            sum[0] += root.val;
+            return;
+        }
+        if (root.left == null && root.right == null) return;
+        if (root.left == null) {
+            helper(root.right, counter+1, maxDepth, sum);
+            return;
+        }
+        if (root.right == null) {
+            helper(root.left, counter+1, maxDepth, sum); 
+            return;
+        }
+        
+        helper(root.left, counter+1, maxDepth, sum);
+        helper(root.right, counter+1, maxDepth, sum);
+    }
     
 }
