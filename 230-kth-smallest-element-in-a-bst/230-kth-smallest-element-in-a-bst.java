@@ -15,6 +15,21 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
+        ArrayList<Integer> list = new ArrayList();
+        dfs(root,list);
+        return list.get(k-1);
+    }
+    
+    public void dfs(TreeNode root, ArrayList<Integer> list) {
+        if (root == null) return;
+        dfs(root.left, list);
+        list.add(root.val);
+        dfs(root.right, list);
+    }
+    
+    
+    /*
+    public int kthSmallest(TreeNode root, int k) {
         
         ArrayList<Integer> list = new ArrayList();
         
@@ -34,5 +49,6 @@ class Solution {
         helper(root.right, list);
         
     }
+    */
     
 }
