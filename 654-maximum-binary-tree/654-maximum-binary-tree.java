@@ -24,8 +24,6 @@ class Solution {
         
         int maxInd = maxIndex(nums, start, end);
         
-        System.out.println(nums[maxInd]);
-        
         TreeNode node = new TreeNode(nums[maxInd]);
         
         node.left = helper(nums, start, maxInd-1);
