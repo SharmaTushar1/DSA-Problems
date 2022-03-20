@@ -24,15 +24,11 @@ class Solution {
     
     public void helper(TreeNode root, int min, int max, int[] res) {
         if (root == null) return;
-        
         min = Math.min(root.val, min);
         max = Math.max(root.val, max);
-        
         res[0] = Math.max(res[0], (max-min));
-        
         helper(root.left, min, max, res);
         helper(root.right, min, max, res);
-        
     }
     
 }
