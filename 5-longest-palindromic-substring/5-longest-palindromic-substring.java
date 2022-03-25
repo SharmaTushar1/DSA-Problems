@@ -1,33 +1,34 @@
 class Solution {
     public String longestPalindrome(String s) {
-        //The idea is similar just expan around like we did in palindromic substring
-        int resLen = 0;
-        int r = 0;
-        int l = 0;
-        String str = "";
-        for (int i =0; i<s.length(); i++) {
+        int left = 0;
+        int right = 0;
+        int maxLen = 0;
+        String result = "";
+        int n = s.length();
+        for (int i = 0; i<n; i++) {
             //odd cases
-            r = i;
-            l = i;
-            while (l>=0 && r<s.length() && s.charAt(l)==s.charAt(r)) {
-                if (r-l+1>resLen) {
-                    str = s.substring(l,r+1);
-                    resLen = r-l+1;
+            left = i;
+            right = i;
+            while (left>=0 && right<s.length() && s.charAt(left) == s.charAt(right)) {
+                if (right-left+1 > maxLen) {
+                    result = s.substring(left, right+1);
+                    maxLen = right-left+1;
                 }
-                l--;
-                r++;
+                left--;
+                right++;
             }
-            l = i;
-            r = i+1;
-            while (l>=0 && r<s.length() && s.charAt(l)==s.charAt(r)) {
-                if (r-l+1>resLen) {
-                    str = s.substring(l,r+1);
-                    resLen = r-l+1;
+            //even cases
+            left = i;
+            right = i+1;
+            while (left>=0 && right<s.length() && s.charAt(left) == s.charAt(right)) {
+                if (right-left+1 > maxLen) {
+                    result = s.substring(left, right+1);
+                    maxLen = right-left+1;
                 }
-                l--;
-                r++;
+                left--;
+                right++;
             }
         }
-        return str;
-    }
+        return result;
+    }    
 }
