@@ -39,17 +39,13 @@ class Solution{
         
         boolean[][] dp = new boolean[N+1][sum+1];
         
-        for (int i = 0; i <= N; i++)
-        dp[i][0] = true;
- 
-    // If sum is not 0 and set is empty,
-    // then answer is false
-    for (int i = 1; i <= sum; i++)
-        dp[0][i] = false;
-        
-        for (int i =1; i<=N; i++) {
-            for (int j = 1; j<=sum; j++) {
-                if (j>=arr[i-1]) {
+        for (int i =0; i<=N; i++) {
+            for (int j = 0; j<=sum; j++) {
+                if (i==0 || j ==0) {
+                    if (i==0) dp[i][j] = false;
+                    if (j==0) dp[i][j] = true;
+                }
+                else if (j>=arr[i-1]) {
                     dp[i][j] = dp[i-1][j-arr[i-1]] || dp[i-1][j];
                 } else {
                     dp[i][j] = dp[i-1][j];
