@@ -1,6 +1,10 @@
 class Solution {
     public boolean PredictTheWinner(int[] nums) {
-        int p1Score = helper(nums, 0, nums.length-1);
+        int[][] dp = new int[nums.length+1][nums.length+1];
+        for (int[] val: dp) {
+            Arrays.fill(val, -1);
+        }
+        int p1Score = helper(nums, 0, nums.length-1, dp);
         int totalScore = 0;
         for (int num: nums) {
             totalScore += num;
@@ -8,12 +12,15 @@ class Solution {
         return p1Score>=totalScore-p1Score;
     }
     
-    public int helper(int[] nums, int i, int j) {
+    public int helper(int[] nums, int i, int j, int[][] dp) {
         if (i>j) return 0;
         else if (i == j) return nums[i];
+        else if (dp[i][j]!=-1) {
+            return dp[i][j];
+        }
         else {
-            int p1Score = Math.max(nums[i]+Math.min(helper(nums, i+2, j), helper(nums, i+1, j-1)), nums[j]+Math.min(helper(nums, i+1, j-1), helper(nums, i, j-2)));
-        return p1Score;
+            dp[i][j] = Math.max(nums[i]+Math.min(helper(nums, i+2, j, dp), helper(nums, i+1, j-1, dp)), nums[j]+Math.min(helper(nums, i+1, j-1, dp), helper(nums, i, j-2, dp)));
+        return dp[i][j];
         }
     }
     
