@@ -1,17 +1,20 @@
 class Solution {
     public boolean PredictTheWinner(int[] nums) {
-        int[][] dp = new int[nums.length][nums.length];
-        for (int s = nums.length; s >= 0; s--) {
-            for (int e = s; e < nums.length; e++) {
-                if (s == e) {
-                    dp[s][e] = nums[s];
-                } else {
-                    int a = nums[s] - dp[s + 1][e];
-                    int b = nums[e] - dp[s][e - 1];
-                    dp[s][e] = Math.max(a, b);
-                }
-            }
+        int p1Score = helper(nums, 0, nums.length-1);
+        int totalScore = 0;
+        for (int num: nums) {
+            totalScore += num;
         }
-        return dp[0][nums.length - 1] >= 0;
+        return p1Score>=totalScore-p1Score;
     }
+    
+    public int helper(int[] nums, int i, int j) {
+        if (i>j) return 0;
+        else if (i == j) return nums[i];
+        else {
+            int p1Score = Math.max(nums[i]+Math.min(helper(nums, i+2, j), helper(nums, i+1, j-1)), nums[j]+Math.min(helper(nums, i+1, j-1), helper(nums, i, j-2)));
+        return p1Score;
+        }
+    }
+    
 }
