@@ -1,1 +1,1 @@
-​
+The Idea is to choose the minimum value. Read the 1st answer by GraceMeng (cute east asian girl)
