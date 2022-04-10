@@ -1,25 +1,24 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int n = nums.length;
-        int index = n;
-        for (int i = n-1; i>0; i--) {
-            if (nums[i-1]<nums[i]) {index = i-1; break;}
+        int index = nums.length-1;
+        for (int j = nums.length-1; j>=0; j--) {
+            if (j==0) {
+                reverse(nums, 0, nums.length-1);
+                return;
+            } else if (nums[j-1]<nums[j]) {index = j-1; break;}            
         }
-        if (index==n) {
-            nums = reverse(nums, 0, n-1);
-            return;
+        for (int j = nums.length-1; j>=index; j--) {
+            if (nums[j]>nums[index]) {
+                int temp = nums[j];
+                nums[j] = nums[index];
+                nums[index] = temp;
+                break;
+            }
         }
-        int swapIndex = -1;
-        for (int i =n-1; i>index; i--) {
-            if (nums[i]>nums[index]) {swapIndex = i; break;}
-        }
-        int temp = nums[index];
-        nums[index] = nums[swapIndex];
-        nums[swapIndex] = temp;
-        nums = reverse(nums, index+1, n-1);
+        reverse(nums, index+1, nums.length-1);
     }
     
-    public int[] reverse(int[] arr, int start, int end) {
+    public void reverse(int[] arr, int start, int end) {
         while (start<end) {
             int temp = arr[start];
             arr[start] = arr[end];
@@ -27,7 +26,7 @@ class Solution {
             start++;
             end--;
         }
-        return arr;
     }
     
 }
+
