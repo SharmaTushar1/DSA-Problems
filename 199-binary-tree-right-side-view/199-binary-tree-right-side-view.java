@@ -26,19 +26,11 @@ class Solution {
         q.offer(root);
         while (!q.isEmpty()) {
             int levelSize = q.size();
-            TreeNode cur = q.poll();
-            boolean visited = false;
             for (int i = 0; i<levelSize; i++) {
-                if (!visited) {
-                    visited = true;
-                    list.add(cur.val);
-                    if (cur.right!=null) q.offer(cur.right);
-                    if (cur.left!=null) q.offer(cur.left);
-                } else {
-                    cur = q.poll();
-                    if (cur.right!=null) q.offer(cur.right);
-                    if (cur.left!=null) q.offer(cur.left);
-                }
+                TreeNode cur = q.poll();
+                if (i==0) list.add(cur.val);
+                if (cur.right!=null) q.offer(cur.right);
+                if (cur.left!=null) q.offer(cur.left);
             }
         }
     }
