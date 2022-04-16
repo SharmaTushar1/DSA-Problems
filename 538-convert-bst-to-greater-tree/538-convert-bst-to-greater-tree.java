@@ -14,18 +14,18 @@
  * }
  */
 class Solution {
-    
     public TreeNode convertBST(TreeNode root) {
-        helper(root, new int[1]);
-        return root;
+        int[] arr =  new int[1];
+        return helper(root, arr);
     }
     
-    public void helper(TreeNode root, int[] value) {
-        if (root == null) return;
-        helper(root.right, value);
-        root.val += value[0];
-        value[0] = root.val;
-        helper(root.left, value);
+    public TreeNode helper(TreeNode root, int[] arr) {
+        if (root==null) return null;
+        helper(root.right, arr);
+        arr[0]+=root.val;
+        root.val = arr[0];
+        helper(root.left, arr);
+        return root;
     }
     
 }
