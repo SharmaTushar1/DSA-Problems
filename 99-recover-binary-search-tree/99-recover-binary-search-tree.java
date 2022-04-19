@@ -14,33 +14,34 @@
  * }
  */
 class Solution {
+    
+    TreeNode firstElement = null;
+    TreeNode secondElement = null;
+    TreeNode prevElement = new TreeNode(Integer.MIN_VALUE);
+    
     public void recoverTree(TreeNode root) {
-        ArrayList<Integer> list = new ArrayList<>();
-        TreeNode cur = root;
-        dfs(cur, list);
-        Collections.sort(list);
-        int[] arr = new int[]{0};
-        compareAndUpdate(root, list, arr);
+        traverse(root);
+        int temp = firstElement.val;
+        firstElement.val = secondElement.val;
+        secondElement.val = temp;
+    }
+    
+    public void traverse(TreeNode root) {
+        if (root == null) return;
+        traverse(root.left);
+        
+        if (firstElement == null && prevElement.val > root.val) {
+            firstElement = prevElement;
+        }
+        
+        if (firstElement != null && prevElement.val > root.val) {
+            secondElement = root;
+        }
+        
+        prevElement = root;
+        
+        traverse(root.right);
         
     }
-    
-    public void dfs(TreeNode cur, ArrayList<Integer> list) {
-        if (cur == null) return;
-        dfs(cur.left, list);
-        list.add(cur.val);
-        dfs(cur.right, list);
-    }
-    
-    public void compareAndUpdate(TreeNode root, ArrayList<Integer> list, int[] cur) {
-        if (root == null) return;
-        compareAndUpdate(root.left, list, cur);
-        root.val = list.get(cur[0]);
-        cur[0]++;
-        compareAndUpdate(root.right, list, cur);
-    }
-    
-    
-    
-    
     
 }
