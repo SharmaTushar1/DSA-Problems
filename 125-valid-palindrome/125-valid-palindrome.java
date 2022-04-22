@@ -1,25 +1,18 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        
-        int start = 0; 
-        int end = s.length()-1;
-        s = s.toLowerCase();
-        
-        while (start<end) {
-            while (start<end && !isAlpha(s.charAt(start))) start++;
-            while (start<end && !isAlpha(s.charAt(end))) end--;
-                if (s.charAt(start)!=s.charAt(end)) return false;
-                else {
-                    start++;
-                    end--;
+        int i = 0;
+        int j =  s.length()-1;
+        while (i<s.length() && j>=0) {
+            while (i<s.length() && !Character.isLetterOrDigit(s.charAt(i))) {
+                i++;
             }
+            while (j>=0 && !Character.isLetterOrDigit(s.charAt(j))) {
+                j--;
+            }
+            if (i<s.length() && j>=0 && (Character.toLowerCase(s.charAt(i))!=Character.toLowerCase(s.charAt(j)))) return false;
+            i++; 
+            j--;
         }
         return true;
-        
     }
-    
-    public boolean isAlpha(char c) {
-        return (c>='0' && c<='9') || (c>='a' && c<='z');
-    }
-    
 }
