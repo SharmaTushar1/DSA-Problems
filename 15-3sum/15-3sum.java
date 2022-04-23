@@ -3,19 +3,20 @@ class Solution {
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
         for (int i = 0; i<nums.length-2; i++) {
-            if (nums[i]>0) break;
-            if (i>0 && nums[i]==nums[i-1]) continue; //I've to do this atleast once that's why i==i-1 instead of i+1==i
-            int start = i+1;
-            int end = nums.length-1;
-            while (start<end) {
-                if (nums[start]+nums[end]+nums[i]>0) end--;
-                else if (nums[start]+nums[end]+nums[i]<0) start++;
-                else {
-                    ans.add(Arrays.asList(nums[i], nums[start], nums[end]));
-                    start++;
-                    end--;
-                    while (start<end && nums[start]==nums[start-1]) start++;
-                    while (start<end && nums[end] == nums[end+1]) end--;
+            if (i==0||(i>0 && nums[i-1]!=nums[i])) {
+                int j = i+1;
+                int k = nums.length-1;
+                while (j<k) {
+                    List<Integer> list = new ArrayList<>();
+                    if (nums[j]+nums[k]+nums[i]>0) k--;
+                    else if (nums[j]+nums[k]+nums[i]<0) j++;
+                    else if (i!=j && i!=k && j!=k && nums[i]+nums[j]+nums[k]==0) {
+                        ans.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                        while (j<k && nums[j]==nums[j+1]) j++;
+                        while (k>j && nums[k]==nums[k-1]) k--;
+                        j++;
+                        k--;
+                    }
                 }
             }
         }
