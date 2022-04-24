@@ -10,8 +10,8 @@ class Solution {
                 map.put(s, new ArrayList<String>());
             }
             map.get(s).add(str);
-            if (!ans.contains(map.get(s))) ans.add(map.get(s));
         }
+        ans.addAll(map.values());
         return ans;
     }
 }
