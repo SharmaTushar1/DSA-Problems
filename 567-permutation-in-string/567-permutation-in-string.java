@@ -1,35 +1,35 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        if (s1.length()>s2.length()) return false;
-        int[] s1Count = new int[26];
-        int[] s2Count = new int[26];
-        
+        if (s2.length()<s1.length()) return false;
+        int[] arr = new int[26];
+        //add the values to the hash array
         for (int i = 0; i<s1.length(); i++) {
-            s1Count[s1.charAt(i)-'a']++;
+            arr[s1.charAt(i)-'a']++;
         }
-        
-        int i=0, j=0;
-        
-        while (j<s1.length()) {
-            s2Count[s2.charAt(j)-'a']++;
-            j++;
+        int i = 0;
+        int j = 0;
+        //point j to it's position
+        for (; j<s1.length(); j++) {
+            arr[s2.charAt(j)-'a']--;
         }
-        
-        j--;
-        
+        j--;        
+        System.out.println(j);
+        if (isEmpty(arr)) return true;
         while (j<s2.length()) {
-            boolean flag = true;
-            for (int k = 0; k<26; k++) {
-                if (s1Count[k]!=s2Count[k]) {flag = false; break;}
-            }
-            if (flag) return true;
-            s2Count[s2.charAt(i)-'a']--;
+            arr[s2.charAt(i)-'a']++;
             i++;
             j++;
-            if (j<s2.length()) s2Count[s2.charAt(j)-'a']++;
+            if (j<s2.length()) arr[s2.charAt(j)-'a']--;
+            if (isEmpty(arr)) return true;
         }
-        return false;
-        
-        
+        return isEmpty(arr);
     }
+    
+    public boolean isEmpty(int[] arr) {
+        for (int i = 0; i<arr.length; i++) {
+            if (arr[i]!=0) return false;
+        }
+        return true;
+    }
+    
 }
