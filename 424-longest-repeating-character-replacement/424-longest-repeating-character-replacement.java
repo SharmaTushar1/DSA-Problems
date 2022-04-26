@@ -9,7 +9,7 @@ class Solution {
             arr[s.charAt(window_end)-'A']++;
             int current = arr[s.charAt(window_end)-'A'];
             maxOcc = Math.max(maxOcc, arr[s.charAt(window_end)-'A']);
-            while (window_end-windowStart+1-maxOcc>k) {
+            if (window_end-windowStart+1-maxOcc>k) {
                 arr[s.charAt(windowStart)-'A']--;
                 windowStart++;
             }
