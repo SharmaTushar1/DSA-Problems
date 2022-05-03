@@ -10,43 +10,23 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        
-        
-        ListNode mid = midFinder(head);
-        
-        ListNode hf = head;
-        
-        
-        ListNode hs = reverse(mid);
-        
-        
-        // System.out.print(hf.next.next.next.val);
-        
-        ListNode temp = new ListNode();
-        
-        while (hf!=null && hs!=null) {
-            temp = hf.next;
-            hf.next = hs;
-            hf = temp;
-            temp = hs.next;
-            hs.next = hf;
-            hs = temp;
-        }
-        
-        
-    }
-     public ListNode midFinder(ListNode head) {
-        ListNode fast = head;
         ListNode slow = head;
-        
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
+        ListNode fast = head;
+        while (fast!=null && fast.next!=null) {
             slow = slow.next;
+            fast = fast.next.next;
         }
-         ListNode mid = slow.next;
-         slow.next = null;
-        
-        return mid;
+        ListNode second = reverse(slow);
+        ListNode cur = head;
+        while (cur!=null && second!=null) {
+            ListNode temp1 = cur.next;
+            cur.next = second;
+            ListNode temp2 = second.next;
+            second.next = temp1;
+            cur = temp1;
+            second = temp2;
+        }
+        if (cur!=null) cur.next = null;
         
     }
     
@@ -60,10 +40,6 @@ class Solution {
             r = r.next;
             q.next = p;
         }
-        
         return q;
-        
     }
 }
-    
-   
