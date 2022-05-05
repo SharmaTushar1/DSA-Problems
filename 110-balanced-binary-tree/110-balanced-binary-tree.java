@@ -22,7 +22,8 @@ class Solution {
         if (root == null) return 0;
         int lHeight = height(root.left);
         int rHeight = height(root.right);
-        if (Math.abs(lHeight-rHeight)>1 || lHeight == -1 || rHeight == -1) return -1;
+        if (Math.abs(lHeight-rHeight)>1) return -1;
+        if (lHeight<0 || rHeight<0) return -1;
         return 1+Math.max(lHeight, rHeight);
     }
     
