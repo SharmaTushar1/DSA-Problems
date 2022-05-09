@@ -21,17 +21,12 @@ class TimeMap {
         int start = 0;
         int end = list.size()-1;
         while (start<end) {
-            int mid = start+(end-start)/2;
-            if (list.get(mid).getValue() == timestamp) return list.get(mid).getKey();
-            if (list.get(mid).getValue() < timestamp) {
-                if (list.get(mid+1).getValue()>timestamp) return list.get(mid).getKey();
-                start = mid+1;
-            }
+            int mid = (start+end+1)/2;
+            if (list.get(mid).getValue() <= timestamp) start = mid;
             else end = mid-1;
         }
         return list.get(start).getValue()<=timestamp?list.get(start).getKey():"";
     }
-    
 }
 /**
  * Your TimeMap object will be instantiated and called as such:
