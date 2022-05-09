@@ -21,7 +21,7 @@ class TimeMap {
         int start = 0;
         int end = list.size()-1;
         while (start<end) {
-            int mid = (start+end+1)/2;
+            int mid = start+(end-start+1)/2;
             if (list.get(mid).getValue() <= timestamp) start = mid;
             else end = mid-1;
         }
