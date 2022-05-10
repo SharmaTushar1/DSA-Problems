@@ -5,18 +5,18 @@ class Solution {
         int mid = 0;
         while (mid<=end) {
             if (nums[mid]==0) {
-                int temp = nums[mid];
-                nums[mid] = nums[start];
-                nums[start] = temp;
-                mid++;
-                start++;
+                swap(nums, mid++, start++);
             } else if (nums[mid]==1) mid++;
             else {
-                int temp = nums[mid];
-                nums[mid] = nums[end];
-                nums[end] = temp;
-                end--;
+                swap(nums, mid, end--);
             }
         }
     }
+    
+    public void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
 }
