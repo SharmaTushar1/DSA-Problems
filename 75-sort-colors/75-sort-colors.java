@@ -4,23 +4,18 @@ class Solution {
         for (int num: nums) map.put(num, map.getOrDefault(num, 0)+1);
         int i = 0;
         if (map.containsKey(0)) {
-            while (i<map.get(0)) {
-                nums[i] = 0;
-                i++;
+            for (int x = 0; x<map.get(0); x++) {
+                nums[i++] = 0;
             }
         }
         if (map.containsKey(1)) {
-            int j = 0;
-            while (j<map.get(1)) {
+            for (int y = 0; y<map.get(1); y++) {
                 nums[i++] = 1;
-                j++;
             }
         }
         if (map.containsKey(2)) {
-            int k = 0;
-            while (k<map.get(2)) {
+            for (int z = 0; z<map.get(2); z++) {
                 nums[i++] = 2;
-                k++;
             }
         }
     }
