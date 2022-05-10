@@ -6,7 +6,8 @@ class Solution {
             map.put(s.charAt(i), i);
         }
         int j = 0;
-        for (int i = 0; i<s.length(); i++) {
+        int i = 0;
+        while (i<s.length()) {
             int count = 0;
             j = Math.max(j, map.get(s.charAt(i)));
             while (i<=j) {
@@ -15,7 +16,6 @@ class Solution {
                 count++;
             }
             list.add(count);
-            i--;
         }
         return list;
         
