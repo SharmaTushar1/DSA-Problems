@@ -3,25 +3,23 @@ class Solution {
         int area = 0;
         int trappedWater = 0;
         
-        //create a leftPrefix array
-        int[] left = new int[height.length];
-        int l = 0;
-        for (int i =  0; i<height.length; i++) {
-            l = Math.max(l, height[i]);
-            left[i] = l;
-        }
-        //create a rightPrefix array
-        int[] right = new int[height.length];
-        int r = 0;
-        for (int i = height.length-1; i>=0; i--) {
-            r = Math.max(r, height[i]);
-            right[i] = r;
+        int lMax = 0, rMax = 0;
+        
+        int l = 0, r = height.length-1;
+        
+        while (l<=r) {
+            if (height[l]<=height[r]) {
+                //that means water can be filled if there's a tower in left which is greater so check for that
+                if (height[l]>=lMax) lMax = height[l];
+                else trappedWater += lMax-height[l];
+                l++;
+            } else {
+                if (height[r]>=rMax) rMax = height[r];
+                else trappedWater += rMax-height[r];
+                r--;
+            }
         }
         
-        for (int i = 0; i<height.length; i++) {
-            area = Math.min(left[i], right[i]) - height[i];
-            trappedWater += Math.max(0, area);
-        }
         return trappedWater;
     }
 }
