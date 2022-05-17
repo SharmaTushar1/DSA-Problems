@@ -1,6 +1,6 @@
 class Solution {
     public String simplifyPath(String path) {
-        Deque<String> st = new LinkedList<>();
+        Deque<String> st = new ArrayDeque<>();
         for (String s: path.split("/")) {
             if (s.equals("..")) st.poll();
             else if (!s.equals(".") && !s.equals("")) st.push(s);
