@@ -1,12 +1,18 @@
 class Solution {
     public int rob(int[] nums) {
-        int loot1 = 0;
-        int loot2 = 0;
-        for (int i = 0; i<nums.length; i++) {
-            int loot = Math.max(loot2, loot1+nums[i]);
-            loot1 = loot2;
-            loot2 = loot;
+        if (nums.length<=2) {
+            int ans = Integer.MIN_VALUE;
+            for (int i = 0; i<nums.length; i++) {
+                ans = Math.max(nums[i], ans);
+            }
+            return ans;
         }
-        return loot2;
-    }   
+        int[] dp = new int[nums.length+1];
+        dp[0] = 0;
+        dp[1] = nums[0];
+        for (int i = 2; i<=nums.length; i++) {
+            dp[i] = Math.max(dp[i-2]+nums[i-1], dp[i-1]);
+        }
+        return dp[nums.length];
+    }
 }
