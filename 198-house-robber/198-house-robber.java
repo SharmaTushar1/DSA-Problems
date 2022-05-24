@@ -11,9 +11,8 @@ class Solution {
         if (n<=0) return 0;
         if (dp[n]!=-1) 
             return dp[n];
-        int result = Math.max(helper(nums, n-2, dp)+nums[n-1], helper(nums, n-1, dp));
-        dp[n] = result;
-        return result;
+        dp[n] = Math.max(helper(nums, n-2, dp)+nums[n-1], helper(nums, n-1, dp));
+        return dp[n];
     }
     
 }
