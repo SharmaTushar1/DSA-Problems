@@ -1,12 +1,11 @@
 class Solution {
     public int maximumBags(int[] capacity, int[] rocks, int additionalRocks) {
-        int[] arr = new int[rocks.length];
-        for (int i = 0; i<arr.length; i++) {
-            arr[i] = capacity[i]-rocks[i];
+        for (int i = 0; i<rocks.length; i++) {
+            rocks[i] = capacity[i]-rocks[i];
         }
-        Arrays.sort(arr);
+        Arrays.sort(rocks);
         int count = 0;
-        for (int val: arr) {
+        for (int val: rocks) {
             if (val == 0) {
                 count++;
                 continue;
