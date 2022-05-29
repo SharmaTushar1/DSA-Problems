@@ -35,24 +35,24 @@ class Solution {
     // Function to detect cycle in an undirected graph.
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean[] vis = new boolean[V];
-        for (int i =0; i<V; i++) {
+        for (int i = 0; i<V; i++) {
             if (!vis[i]) {
-                if (dfs(i, adj, vis, -1)) return true;
+                if (dfs(adj, i, vis, -1)) 
+                    return true;
             }
         }
         return false;
     }
     
-    public boolean dfs(int s, ArrayList<ArrayList<Integer>> adj, boolean[] vis, int parent) {
-        vis[s] = true;
-        for (Integer it: adj.get(s)) {
+    public boolean dfs(ArrayList<ArrayList<Integer>> adj, int i, boolean[] vis, int prev) {
+        vis[i] = true;
+        for (int it: adj.get(i)) {
             if (!vis[it]) {
-                if (dfs(it, adj, vis, s)) return true;
-            } else if (parent!=it) {
+                if (dfs(adj, it, vis, i)) return true;
+            } else if (vis[it] && it!=prev) {
                 return true;
             }
         }
         return false;
     }
-    
 }
