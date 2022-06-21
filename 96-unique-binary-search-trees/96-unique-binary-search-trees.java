@@ -1,17 +1,11 @@
 class Solution {
-    int[] dp = new int[20];
     public int numTrees(int n) {
-        if (n<=1) return 1;
-        dp[0]= 1;
-        dp[1] =1;
-        if (dp[n]>0) 
-            return dp[n];
+        if (n==0) return 1;
+        if (n==1 || n==2) return n;
+        int sum = 0;
         for (int i = 1; i<=n; i++) {
-            dp[n] += numTrees(i-1)*numTrees(n-i);
+            sum += numTrees(n-i)*numTrees(i-1);
         }
-        return dp[n];
+        return sum;
     }
-    
-    
-    
 }
