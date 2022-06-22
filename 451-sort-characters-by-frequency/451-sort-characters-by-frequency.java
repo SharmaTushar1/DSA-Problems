@@ -10,8 +10,8 @@ class Solution {
         }
         StringBuilder sb = new StringBuilder();
         while (!pq.isEmpty()) {
-            Map.Entry<Character, Integer> set = pq.poll();
-            for (int i = 0; i<set.getValue(); i++) {
+            Map.Entry set = pq.poll();
+            for (int i = 0; i<(int)set.getValue(); i++) {
                 sb.append(set.getKey());
             }
         }
