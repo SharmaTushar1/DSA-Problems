@@ -2,7 +2,6 @@ class Solution {
     public int numSquares(int n) {
         Queue<Integer> q = new LinkedList<>();
         //add visited array so we don't go to values which we have traversed already (similar to dp)
-        //we can avoid visited array but that'll improve the time complexity
         HashSet<Integer> visited = new HashSet<>();
         int ans = 0;
         q.offer(n);
