@@ -31,13 +31,8 @@ class Solution {
             ans.add(level);
         }
         int i = 0 , j = ans.size()-1;
-        while (i<j) {
-            List<Integer> cur = ans.get(i);
-            ans.set(i, ans.get(j));
-            ans.set(j, cur);
-            i++;
-            j--;
-        }
+        //reverse the list
+        Collections.reverse(ans);
         return ans;
     }
 }
