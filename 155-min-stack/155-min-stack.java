@@ -1,21 +1,28 @@
 class MinStack {
-    Stack<Integer> minStack;
-    Stack<Integer> stack;
+    private Stack<Integer> stack;
+    public Stack<Integer> minValues;
+    
     public MinStack() {
         stack = new Stack<>();
-        minStack = new Stack<>();
-        minStack.add(Integer.MAX_VALUE);
+        minValues = new Stack<>();
     }
     
     public void push(int val) {
+        if (stack.isEmpty() || val<=minValues.peek()) {
+            minValues.add(val);
+        }
         stack.add(val);
-        if (val<minStack.peek()) minStack.add(val);
-        else minStack.add(minStack.peek());
     }
     
     public void pop() {
+        // System.out.println(stack.peek());
+        // System.out.println(minValues.m);
+        
+        if ((int)stack.peek()==(int)minValues.peek()) {
+            // System.out.println("asdf");
+            minValues.pop(); 
+        }
         stack.pop();
-        minStack.pop();
     }
     
     public int top() {
@@ -23,7 +30,7 @@ class MinStack {
     }
     
     public int getMin() {
-        return minStack.peek();
+        return minValues.peek();
     }
 }
 
