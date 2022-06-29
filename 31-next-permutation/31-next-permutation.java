@@ -1,32 +1,35 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int index = nums.length-1;
-        for (int j = nums.length-1; j>=0; j--) {
-            if (j==0) {
-                reverse(nums, 0, nums.length-1);
-                return;
-            } else if (nums[j-1]<nums[j]) {index = j-1; break;}            
+        //find a smaller value
+        int i = nums.length-2;
+        while (i>=0 && nums[i+1]<=nums[i]) {
+            i--;
         }
-        for (int j = nums.length-1; j>=index; j--) {
-            if (nums[j]>nums[index]) {
-                int temp = nums[j];
-                nums[j] = nums[index];
-                nums[index] = temp;
-                break;
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (nums[j] <= nums[i]) {
+                j--;
             }
+            swap(nums, i, j);
         }
-        reverse(nums, index+1, nums.length-1);
+        reverse(nums, i+1);
     }
     
-    public void reverse(int[] arr, int start, int end) {
+    public void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
+    public void reverse(int[] nums, int start) {
+        int end = nums.length-1;
         while (start<end) {
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
             start++;
             end--;
         }
     }
     
 }
-
