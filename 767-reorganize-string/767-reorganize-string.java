@@ -1,38 +1,31 @@
 class Solution {
     public String reorganizeString(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
+        PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>((a,b)->Integer.compare(b.getValue(), a.getValue()));
         for (int i = 0; i<s.length(); i++) {
             map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0)+1);
         }
-        PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>((a,b)->b.getValue()-a.getValue());
-        pq.addAll(map.entrySet());
-        
         StringBuilder sb = new StringBuilder();
-        
-        while (!pq.isEmpty()) {
-            Map.Entry<Character, Integer> temp1 = pq.poll();
-            //if the character at sb's end is different from the max frequency character or the string is empty
-            if (sb.length()==0 || sb.charAt(sb.length()-1)!=temp1.getKey()) {
-                sb.append(temp1.getKey());
-                //update the value
-                temp1.setValue(temp1.getValue()-1);
-            } else { //the character is same
-                //hold the current character and look for the 2nd most frequent character
-                Map.Entry<Character, Integer> temp2 = pq.poll();
-                //if this value is empty then there is no possible way to avoid adjacent duplicate values
-                if (temp2==null) 
-                    return "";
-                //else do the same thing as above
-                sb.append(temp2.getKey());
-                //update the value
-                temp2.setValue(temp2.getValue()-1);
-                //if still has some value left add again to the heap
-                if (temp2.getValue()!=0) 
-                    pq.offer(temp2);
-            }
-            if (temp1.getValue()!=0) 
-                pq.offer(temp1);
+        System.out.println(map);
+        for (Map.Entry<Character, Integer> set: map.entrySet()) {
+            pq.add(set);
         }
+        while (!pq.isEmpty()) {
+            Map.Entry<Character, Integer> cur1 = pq.poll();
+            if (sb.length()==0 || sb.charAt(sb.length()-1)!=cur1.getKey()) {
+                sb.append(cur1.getKey());
+                cur1.setValue(cur1.getValue()-1);
+            } else {
+                Map.Entry<Character, Integer> cur2 = pq.poll();
+                if (cur2 == null)
+                    return "";
+                sb.append(cur2.getKey());
+                cur2.setValue(cur2.getValue()-1);
+                if (cur2.getValue()!=0) pq.add(cur2);
+            }
+                if (cur1.getValue()!=0) 
+                    pq.add(cur1);
+            }
         return sb.toString();
     }
 }
