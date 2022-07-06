@@ -16,22 +16,23 @@
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
-        if (root == null) return ans;
-        Deque<TreeNode> q = new LinkedList<>();
-        q.addFirst(root);
+        if (root == null) 
+            return ans;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
         int count = 0;
         while (!q.isEmpty()) {
-            int size = q.size();
-            List<Integer> list = new ArrayList<>();
-            for (int i = 0; i<size; i++) {
-                    TreeNode node = q.removeLast();
-                    list.add(node.val);
-                    if (node.left!=null) q.addFirst(node.left);
-                    if (node.right!=null) q.addFirst(node.right);
+            int qSize = q.size();
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i<qSize; i++) {
+                TreeNode cur = q.poll();
+                list.add(cur.val);
+                if (cur.left!=null) q.add(cur.left);
+                if (cur.right!=null) q.add(cur.right);
             }
-            if (count%2==0) {
+            if (count%2==0) 
                 ans.add(list);
-            } else {
+            else {
                 Collections.reverse(list);
                 ans.add(list);
             }
