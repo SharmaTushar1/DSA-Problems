@@ -15,7 +15,7 @@ class Solution {
                 cur++;
                 i++;
             }
-            else if (start[i]>=end[j]) {
+            else {
                 cur--;
                 j++;
             }
