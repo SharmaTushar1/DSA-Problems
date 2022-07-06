@@ -1,22 +1,27 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
-        List<int[]> res = new ArrayList<>();
-        if (intervals.length == 0 || intervals == null) {
-            return res.toArray(new int[0][]);
-        }
-        Arrays.sort(intervals, (a,b)->a[0]-b[0]);//lambda expresion sort
-        int start = intervals[0][0];
-        int end = intervals[0][1];
-        for (int[] i:intervals) {
-            if (i[0]<=end) {
-                end = Math.max(end,i[1]);
+        ArrayList<int[]> ans = new ArrayList<>();
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));
+        ans.add(intervals[0]);
+        for (int i = 1; i<intervals.length; i++) {
+            int prevStart = ans.get(ans.size()-1)[0];
+            //comparing the values of prevEnd and curEnd
+            int curStart = intervals[i][0];
+            if (curStart<=ans.get(ans.size()-1)[1]) {
+                //do the merging
+                ans.get(ans.size()-1)[1] = Math.max(ans.get(ans.size()-1)[1], intervals[i][1]);
             } else {
-                res.add(new int[]{start,end});
-                start = i[0];
-                end = i[1];               
+                ans.add(intervals[i]);
             }
         }
-        res.add(new int[]{start, end});
-        return res.toArray(new int[0][]);
+        int[][] res = new int[ans.size()][2];
+        ans.toArray(res);
+        return res;
     }
 }
+
+/*
+
+ans = [[1,6], ]
+
+*/
