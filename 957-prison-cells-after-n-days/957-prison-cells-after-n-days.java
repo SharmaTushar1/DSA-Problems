@@ -1,37 +1,35 @@
 class Solution {
-    public int[] prisonAfterNDays(int[] cells, int N) {
-		if(cells==null || cells.length==0 || N<=0) return cells;
-        boolean hasCycle = false;
-        int cycle = 0;
-        HashSet<String> set = new HashSet<>(); 
-        for(int i=0;i<N;i++){
-            int[] next = nextDay(cells);
-            System.out.println(Arrays.toString(next));
-            String key = Arrays.toString(next);
-            if(!set.contains(key)){ //store cell state
+    public int[] prisonAfterNDays(int[] cells, int n) {
+        //so basically, the values will get repeated after some time and instead of doing the bruteforce n times we can just find when the values are repeating and we can just mod the n and then return the nth next day
+        //for that we'll use a hashset
+        HashSet<String> set = new HashSet<>();
+        int count = 0;
+        for (int i = 0; i<n; i++) {
+            int[] nextDay = findNext(cells);
+            String key = Arrays.toString(nextDay);
+            if (!set.contains(key)) {
                 set.add(key);
-                cycle++;
-            }
-            else{ //hit a cycle
-                // hasCycle = true;
+                count++;
+            } else {
+                //values are getting repeated so we can break
                 break;
             }
-            cells = next;
+            cells = nextDay;
         }
-        // if(hasCycle){
-            N%=cycle;
-            for(int i=0;i<N;i++){
-                cells = nextDay(cells);
-            }   
-        // }
+        n %= count;
+        for (int i = 0; i<n; i++) {
+            cells = findNext(cells);
+        }
         return cells;
     }
     
-    private int[] nextDay(int[] cells){
-        int[] tmp = new int[cells.length];
-        for(int i=1;i<cells.length-1;i++){
-            tmp[i]=cells[i-1]==cells[i+1]?1:0;
+    //function to find the next cell 
+    public int[] findNext(int[] cells) {
+        int[] temp = new int[cells.length];
+        for (int i = 1; i<cells.length-1; i++) {
+            temp[i] = cells[i-1]==cells[i+1]?1:0;
         }
-        return tmp;
+        return temp;
     }
+    
 }
