@@ -1,3 +1,5 @@
+//Same as rotting oranges
+
 class Solution {
     public void wallsAndGates(int[][] rooms) {
         Queue<int[]> q = new LinkedList<>();
@@ -16,14 +18,18 @@ class Solution {
         while (!q.isEmpty()) {
             ++dis;
             int[] cur = q.poll();
-            System.out.println(Arrays.toString(cur));
+            int row = cur[0];
+            int col = cur[1];
             for (int[] dir: dirs) {
-                int x = cur[0]+dir[0];
-                int y = cur[1]+dir[1];
+                int x = row+dir[0];
+                int y = col+dir[1];
                 if (x>=m || y>=n || x<0 || y<0 || rooms[x][y]!=Integer.MAX_VALUE)
                     continue;
                 q.add(new int[]{x, y});
-                rooms[x][y] = rooms[cur[0]][cur[1]]+1;
+                //since cur is basically the index of door (which is equal to 0)
+                //So, we can just grab that value (rooms[row][col]) and add 1 to it and change it every time
+                rooms[x][y] = rooms[row][col]+1;
+                //So, one level further from door (value 0) is equal to 1. Now, we do bfs from that position so value will be 2 and so on.
             }
         }
     }
