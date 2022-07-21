@@ -47,17 +47,9 @@ class Solution {
         }
         
         if (leftPrev!=null) leftPrev.next = q;
-        else head = q;
+        else head = q;//If there's is no head then after reversing the ending part will become the head
         
-        
-        return head;
-        
-        
-        
-        
-        
-        
-        
+        return head;      
         
     }
 }
