@@ -1,18 +1,23 @@
 class Solution {
     public int lengthOfLongestSubstringTwoDistinct(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        int start = 0, end = 0;
-        int ans = 0;
-        while (end<s.length()) {
-            map.put(s.charAt(end), end);
-            if (map.size()>2) {
-                int index = Collections.min(map.values());
-                map.remove(s.charAt(index));
-                start = index+1;
-            }
-            ans = Math.max(end-start+1, ans);
-            end++;
-        }
-        return ans;
+  int maxLen = 0;
+  int start = 0, end=0;
+  HashMap<Character, Integer> map = new HashMap<>();
+  while (end<s.length()) {
+    //put the value in the hashmap.
+    //We will put the character and index and whenever the same character is found we will just replace the index.
+    //We just want the latest index so we can overwrite when we encounter the same character.
+    map.put(s.charAt(end), end);
+    //character limit exceeded.
+    if (map.size()>2) {
+      //grab the minimum index
+      int index = Collections.min(map.values());//this was the tricky part for me. I'm bad at java.
+      map.remove(s.charAt(index));//remove that character
+      start = index+1;//move start to the next character
     }
+    end++;
+    maxLen = Math.max(maxLen, end-start);
+  }
+  return maxLen;
+}
 }
