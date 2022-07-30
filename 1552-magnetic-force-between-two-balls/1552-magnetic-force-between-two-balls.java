@@ -1,34 +1,30 @@
 class Solution {
     public int maxDistance(int[] position, int m) {
         Arrays.sort(position);
-        int start = 1;
         int end = Integer.MIN_VALUE;
-        for (int pos: position) end = Math.max(pos, end);
+        for (int pos: position)
+            end = Math.max(end, pos);
         end--;
-        int res = 0;
+        int start = 1;
         while (start<=end) {
             int mid = start+(end-start)/2;
-            System.out.println(end+" "+start+" "+mid);
-            if (canPlace(position, mid, m)) {
-                res = mid;
-                start = mid+1;
-            }
-            else end = mid-1;
+            if (!isValid(mid, position, m))
+                end = mid-1;
+            else start = mid+1;
         }
-        return res;
+        return end;
     }
     
-    public boolean canPlace(int[] position, int distance, int m) {
-        int cows = 1;
-        int prev = position[0];
-        for (int i = 0; i<position.length; i++) {
-            if (position[i]-prev >= distance) {
-                cows++;
-                prev = position[i];
+    public boolean isValid(int dis, int[] position, int m) {
+        int start = 0, end = 0;
+        int count =1;
+        for (; end<position.length; end++) {
+            if (position[end]-position[start]>=dis) {
+                count++;
+                start = end;
             }
         }
-        System.out.println("Cows -> "+cows);
-        return cows>=m;
+        return count>=m;
     }
     
 }
