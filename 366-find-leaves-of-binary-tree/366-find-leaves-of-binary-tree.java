@@ -13,29 +13,18 @@
  *     }
  * }
  */
-class Solution {
+public class Solution {
     public List<List<Integer>> findLeaves(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Pair<Integer, Integer>> list = new ArrayList<>();
-        int height = findHeight(root, list);
-        Collections.sort(list, (a,b)->Integer.compare(a.getKey(), b.getKey()));
-        int j=0; 
-        for (int i=1; i<=height; i++) {
-            List<Integer> cur = new ArrayList<>();
-            while (j<list.size() && list.get(j).getKey()==i) {
-                cur.add(list.get(j).getValue());
-                j++;
-            }
-            ans.add(cur);
-        }
-        return ans;
+        List<List<Integer>> res = new ArrayList<>();
+        height(root, res);
+        return res;
     }
-    
-    public int findHeight(TreeNode root, List<Pair<Integer, Integer>> list) {
-        if (root == null) 
-            return 0;
-        int height = 1+Math.max(findHeight(root.left, list), findHeight(root.right, list));
-        list.add(new Pair<Integer, Integer>(height, root.val));
-        return height;
+    private int height(TreeNode node, List<List<Integer>> res){
+        if (node == null)
+            return -1;
+        int level = 1+Math.max(height(node.left, res), height(node.right, res));
+        if (res.size()<level+1) res.add(new ArrayList<>());
+        res.get(level).add(node.val);
+        return level;
     }
 }
