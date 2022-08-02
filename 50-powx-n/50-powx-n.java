@@ -1,13 +1,14 @@
 class Solution {
     public double myPow(double x, int n) {
-        
-        if (n==0) return 1;
-        
-        if (n<0) {
-            return 1/x * myPow(1/x, -(n + 1));
-        }
-        return n%2==0?myPow(x*x,n/2):x*myPow(x*x,n/2);
-        
-        
+        long N = (long)n;
+        return myPoww(x, N);
+    }
+    public double myPoww(double x, long N) {
+        if (N==0) return 1;
+        if (N<0) {
+            N = -N;
+            x = 1/x;
+        } 
+        return N%2==0?myPoww(x*x, N/2):x*myPoww(x*x, N/2);
     }
 }
