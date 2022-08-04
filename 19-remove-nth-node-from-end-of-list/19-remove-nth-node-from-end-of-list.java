@@ -10,27 +10,29 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        //first find the size
+        //find the same index (but from start)
+        //use 3 pointer method
+        int sz = listSize(head);
+        if (sz==1) return null;
+        int index = sz-n;
+        if (index==0) return head.next;
+        ListNode temp = head;
+        for (int i=1; i<index; i++) {
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+        return head;
+    }
+    
+    public int listSize(ListNode head) {
         ListNode cur = head;
         int len = 0;
         while (cur!=null) {
-            cur = cur.next;
             len++;
+            cur = cur.next;
         }
-        if (n == len) return head.next;
-        if (n==1) {
-            cur = head;
-            for (int i = 1; i<len-1; i++) {
-                cur = cur.next;
-            }
-            cur.next = null;
-            return head;
-        } 
-        int j = len-n;
-        ListNode prev = head;
-        for (int i = 1; i<j; i++) {
-            prev = prev.next;
-        }
-        prev.next = prev.next.next;
-        return head;
+        return len;
     }
+    
 }
