@@ -9,51 +9,21 @@
  *     }
  * }
  */
+//find the length of both. In the give figure 6 and 5
+//But that will be complicated as we will have to assign different if else conditions for 
+//cases as we don't know which one will be smaller.
+//Watch this video for approach: https://www.youtube.com/watch?v=D0X0BONOQhI&ab_channel=NeetCode (don't see the code)
+//They will travel the same distance
 public class Solution {
-    
-    //optimized approach link to explanation - https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/49785/Java-solution-without-knowing-the-difference-in-len!/165648
-    
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        
-        if (headA == null || headB == null) return null;
-        
-        ListNode a = headA;
-        ListNode b = headB;
-        
-        while (a != b) {
-            
-            a = a ==null?headB:a.next;
-            b = b==null?headA:b.next;
-            
+        ListNode node1 = headA;
+        ListNode node2 = headB;
+        while (node1!=node2) {
+            node1 = node1==null?headB:node1.next;
+            node2 = node2==null?headA:node2.next;
         }
-        
-        return a;
-        
+        return node1;//Either they will both be equal to null or same
     }
     
-    //Brute force approach
-//     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        
-//         // int len = length(headA);
-        
-//         ListNode tempB = headB;
-        
-//         ListNode tempA = headA;
-        
-//         while (tempA!=null) {
-//             tempB= headB;
-            
-//             while (tempB != null) {
-                
-//                 if (tempA==tempB) return tempA;
-//                 tempB = tempB.next;
-                
-//             }
-//             tempA = tempA.next;
-//         }
-        
-//         return null;
-        
-//     }
     
 }
