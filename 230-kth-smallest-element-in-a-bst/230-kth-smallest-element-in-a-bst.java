@@ -15,17 +15,17 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        ArrayList<Integer> list = new ArrayList<>();
-        dfs(root, list);
-        return list.get(k-1);
-    }
-    
-    public void dfs(TreeNode root, ArrayList<Integer> list) {
-        if (root!=null) {
-            dfs(root.left, list);
-            list.add(root.val);
-            dfs(root.right, list);
+        //We will need a stack
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (true) {
+            //go to the left most as it is the smallest
+            while (root!=null) {
+                stack.addLast(root);
+                root = root.left;
+            }
+            root = stack.pollLast();
+            if (--k==0) return root.val;
+            root = root.right;//the root is not the kth smallest so look on the right
         }
     }
-    
 }
