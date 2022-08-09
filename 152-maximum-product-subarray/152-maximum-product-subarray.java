@@ -1,13 +1,12 @@
 class Solution {
-    public int maxProduct(int[] A) {
-      int max = 1, min = 1, result = A[0];
-        for (int i = 0; i < A.length; i++) {
-            //we need to keep track of the minimum value 
-            //because multiplying it with the remaining value can give us the maximum value
-            int temp = max;
-            max = Math.max(Math.max(max * A[i], min * A[i]), A[i]);
-            min = Math.min(Math.min(temp * A[i], min * A[i]), A[i]);
-            result = Math.max(result, max);
+    public int maxProduct(int[] nums) {
+        int max = nums[0], min = nums[0];
+        int result = nums[0];
+        for (int i=1; i<nums.length; i++) {
+            int temp = min;
+            min = Math.min(Math.min(nums[i]*min, nums[i]*max), nums[i]);
+            max = Math.max(Math.max(nums[i]*temp, nums[i]*max), nums[i]);
+            result = Math.max(max, result);
         }
         return result;
     }
