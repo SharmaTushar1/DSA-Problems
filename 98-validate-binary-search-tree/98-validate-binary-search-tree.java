@@ -21,9 +21,8 @@ class Solution {
     public boolean isValid(long lowerLimit, long upperLimit, TreeNode root) {
         if (root==null) return true;
         if (lowerLimit<root.val && upperLimit>root.val) {
-            return isValid(lowerLimit, (long)root.val, root.left) && isValid((long)root.val, upperLimit, root.right);
+            return isValid(lowerLimit, root.val, root.left) && isValid(root.val, upperLimit, root.right);
         } 
         return false;
     }
-    
 }
